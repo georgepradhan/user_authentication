@@ -10,20 +10,23 @@ post '/create' do
   if params[:password] == params[:password_again]
     session[:user_id] = User.create(email: params[:email], password: params[:password]).id 
     @message = "Logged in successfully."
+    erb :secret_page
   else
     @message = "Passwords did not match. Try again." 
+    erb :index
   end
-  redirect '/'
+  
 end
 
 post '/login' do
   if User.authenticate(params[:email], params[:password])
     session[:user_id] = User.find_by_email(params[:email]).id
     @message = "Logged in successfully."
+    erb :secret_page
   else
-    @message = "Passwords did not match. Try again." 
+    @message = "Email or password was invalid. Try again." 
+    erb :index
   end
-  redirect '/'
 end
 
 get '/secret_page' do
