@@ -1,5 +1,13 @@
 <div class="container">
 
+  
+  <% if @message %>
+    <div class="container">
+      <h4><%= @message %></h4>
+    </div>
+  <% end %>
+  
+
   <h4>If you have an account, please enter your login info below</h4>
 
   <form action='/login' method="post">
